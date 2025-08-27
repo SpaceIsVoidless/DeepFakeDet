@@ -36,9 +36,8 @@ ENV/
 uploads/*
 !uploads/.gitkeep
 
-# Model weights
-models/weights/*
-!models/weights/.gitkeep
+# Model weights - Tracked in Git
+# models/weights/  # Commented out to track weights in Git
 
 # Logs
 *.log

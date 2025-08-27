@@ -2,9 +2,17 @@ services:
   - type: web
     name: deepfake-detector
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app"
+    buildCommand: |
+      pip install -r requirements.txt &&
+      python download_models.py
+    startCommand: "gunicorn -c gunicorn_config.py app:app"
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.18
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: PYTHONHASHSEED
+        value: "42"
     plan: free
+    autoDeploy: true
+    buildCommandRetries: 2
